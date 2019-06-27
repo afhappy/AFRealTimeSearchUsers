@@ -72,33 +72,10 @@ fileprivate func dealMostLanguage(userName: String?, result resultBlock: resultB
                 return
             }
             
-            // 每个用户language集合，后续需要统计出现次数最多的语言
-            var languageArr: [String] = []
-            tempResultArray.forEach({ (item) in
-                guard let tempItem = item as? [String: Any] else {
-                    return
-                }
-                
-                for (key, value) in tempItem {
-                    if key == "language" {
-                        if value is NSNull {
-                            return
-                        } else {
-                            languageArr.append(value as? String ?? "")
-                        }
-                    }
-                }
-            })
-            
-            guard languageArr.count > 0 else {
-                return
-            }
-            
-            // 统计出现次数最多的语言
-            let language = mostLanguage(array: languageArr)
-            
+//            计算用户使用最多的语言
+            let commonLanguage = mostLanguage(array: tempResultArray)
             if let tempResult = resultBlock {
-                tempResult(language)
+                tempResult(commonLanguage)
             }
             
         }) { (error) in
@@ -111,31 +88,50 @@ fileprivate func dealMostLanguage(userName: String?, result resultBlock: resultB
  *  MARK: - 统计用户使用最多的语言
  *
  *  - Paramters:
- *      - array: 语言数组
+ *      - array: 用户的repos
  *  - Returns:
  *      - 用户使用最多的语言
  **/
-fileprivate func mostLanguage(array: [String]?) -> String? {
-    guard let tempLanguageArray = array, tempLanguageArray.count > 0 else {
+fileprivate func mostLanguage(array: [Any]?) -> String? {
+    guard let tempRepos = array, tempRepos.count > 0 else {
         return ""
     }
     
+    // 需要统计出现次数最多的语言，使用字典，key为语言，value为语言出现的次数
     var dic: [String: Int] = [:]
-    for v in tempLanguageArray {
-        if let value = dic[v] {
-            dic[v] = value + 1
-        } else {
-            dic[v] = 1
+    tempRepos.forEach({ (item) in
+        guard let tempItem = item as? [String: Any] else {
+            return
         }
-    }
+        for (key, value) in tempItem {
+            if key == "language" {
+                if value is NSNull {
+                    return
+                } else {
+                    let language: String = value as! String
+                    if let languageNum = dic[language] {
+                        dic[language] = languageNum + 1
+                    }else{
+                        dic[language] = 1
+                    }
+                    
+                    
+                }
+            }
+        }
+    })
     
+    // 统计出现次数最多的语言
+    guard dic.count > 0 else {
+        return ""
+    }
     var maxCount = 1
-    var finalStr = ""
+    var finalLanguage = ""
     for (z, j) in dic {
         if maxCount < j {
             maxCount = j
-            finalStr = z
+            finalLanguage = z
         }
     }
-    return finalStr
+    return finalLanguage
 }
