@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		055E58DA22C5FB5D00F37789 /* AFSearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E58D922C5FB5D00F37789 /* AFSearchUsersViewModel.swift */; };
 		0568CFE422BCD59D009CB6E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568CFE322BCD59D009CB6E5 /* AppDelegate.swift */; };
 		0568CFE922BCD59D009CB6E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0568CFE722BCD59D009CB6E5 /* Main.storyboard */; };
 		0568CFEB22BCD59F009CB6E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0568CFEA22BCD59F009CB6E5 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		055E58D922C5FB5D00F37789 /* AFSearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFSearchUsersViewModel.swift; sourceTree = "<group>"; };
 		0568CFE022BCD59D009CB6E5 /* AFRealTimeSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AFRealTimeSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0568CFE322BCD59D009CB6E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0568CFE822BCD59D009CB6E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		055E58D822C5FB4300F37789 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				055E58D922C5FB5D00F37789 /* AFSearchUsersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0568CFD722BCD59D009CB6E5 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		0568CFF522BCFDBD009CB6E5 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				055E58D822C5FB4300F37789 /* ViewModel */,
 				0568CFF622BCFDBD009CB6E5 /* Controller */,
 				0568CFF822BCFDBD009CB6E5 /* Model */,
 				0568CFF922BCFDBD009CB6E5 /* View */,
@@ -292,6 +303,7 @@
 				0568CFE422BCD59D009CB6E5 /* AppDelegate.swift in Sources */,
 				1CDC8C0922BF5E5300B76450 /* AFNetApi.swift in Sources */,
 				0568D00322BD2886009CB6E5 /* AFNetWorking.swift in Sources */,
+				055E58DA22C5FB5D00F37789 /* AFSearchUsersViewModel.swift in Sources */,
 				0568D00122BCFF8C009CB6E5 /* AFSystemConfInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

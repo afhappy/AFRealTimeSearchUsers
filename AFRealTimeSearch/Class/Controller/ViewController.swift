@@ -32,48 +32,11 @@ class ViewController: UIViewController {
         
         setupUI()
     }
-
-}
-
-/*
- *  MARK: - 网络请求
- */
-extension ViewController {
-    /**
-     *  MARK: - 请求用户数据
-     *
-     *  - Parameters:
-     *      - userName: 用户名
-     **/
-    fileprivate func requestUserData(userName: String?) {
-        // 判断用户名
-        guard let tempUserName = userName, tempUserName != "" else {
-            self.tableView?.isHidden = true
-            return
-        }
-        self.tableView?.isHidden = false
-        
-        // 请求数据
-        let urlString: String = api_getUserInfo + tempUserName
-        
-        AFNetWorking.manager.getRequest(urlString, success: { (result) in
-            // model
-            self.dataItem = AFSearchUsersModel.deserialize(from: (result as? [String: Any]))
-            
-            if let tempItem = self.dataItem?.items {
-                guard tempItem.count > 0 else {
-                    return
-                }
-                self.dataSource = tempItem
-            }
-            
-            // 刷新UI
-            self.refreshUI()
-            
-        }) { (error) in
-            print(error as Any)
-        }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.Task.SearchUsersKeyword, object: nil)
     }
+
 }
 
 /*
@@ -119,6 +82,20 @@ extension ViewController {
     }
     
 }
+/*
+ * MARK: - 获取数据
+ */
+extension ViewController {
+    func getData(userName: String?) {
+        //        处理请求结果
+        let searchUsersViewModel = AFSearchUsersViewModel()
+        searchUsersViewModel.requestUserData(userName: userName) { (result) in
+            self.dataSource = result ?? []
+            // 刷新UI
+            self.refreshUI()
+        }
+    }
+}
 
 /*
  *  MARK: - 事件处理
@@ -130,7 +107,7 @@ extension ViewController {
     @objc func getKeyword(noti: Notification) {
         // 获取搜索关键字请求数据
         let keyword = noti.object as! String
-        requestUserData(userName: keyword)
+        getData(userName: keyword)
     }
 }
 

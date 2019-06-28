@@ -43,6 +43,10 @@ class AFSearchUsersTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.Task.UserUseMostLanguage, object: nil)
+    }
 }
 
 /*
